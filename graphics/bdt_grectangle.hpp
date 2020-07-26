@@ -58,7 +58,6 @@ public:
 	GRectangle* get_intersection(const GRectangle&) const ;
 	
 	GRectangle* get_union(const GRectangle&) const ;
-	
 
 	virtual string to_string() const override {	
 		return GPoint::to_string() + GDimension::to_string();
