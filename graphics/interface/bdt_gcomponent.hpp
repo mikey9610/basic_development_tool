@@ -52,6 +52,7 @@ public:
 	virtual void render() override {
 		GRectangle* abs_bounds = get_abs_bounds();
 		if(abs_bounds == nullptr)	return;
+		if(this->visible_ == false)	return;
 		
 		GRenderable::_set_color(foreground_,background_);
 		for(int h=0; h<abs_bounds->get_height(); h++) {
