@@ -6,7 +6,7 @@
 #define GDIMENSION
 
 #include <stdexcept>
-#include "../basic/interface/bdt_stringlizable.hpp"
+#include "../interface/bdt_stringlizable.hpp"
 
 namespace bdt {
 namespace graphic {

@@ -5,26 +5,42 @@
 #ifndef GBUTTON
 #define GBUTTON
 
-#include "interface/bdt_gcomponent.hpp"
-#include "interface/bdt_glabelable.hpp"
+#include "bdt_gcomponent.hpp"
+#include "../interface/bdt_labelable.hpp"
 
 namespace bdt {
 namespace graphic {
 
-class GButton : virtual public GComponent, virtual public GLabelable {
+class GButton : virtual public GComponent, virtual public Labelable {
 protected:
 
+	bool enabled_;
+
+	virtual void perform()=0;
 
 public:	
-	GButton()
-	 :	GComponent() {}
 
-	virtual void render() override {
-		GComponent::render();
-		GLabelable::render(this->get_abs_bounds());
+	GButton()
+	 :	GComponent(),
+	 	Labelable(),
+		enabled_(true) {}
+
+	inline bool is_enabled() const {	return this->enabled_;	}
+	inline void set_enabled(bool enabled) {	this->enabled_ = enabled;	}
+
+	inline void click() {
+		if(!enabled_)	return;
+		this->perform();
 	}
 
-	virtual string to_string() const override {	return "GButton";	}
+	// override Labelable
+	virtual void render() final {
+		GComponent::render();
+		Labelable::render(this->get_abs_bounds());
+	}
+
+	// override Stringlizable
+	virtual string to_string() const final {	return "GButton";	}
 
 };
 

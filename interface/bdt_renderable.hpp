@@ -1,20 +1,19 @@
 /*
-	INTERFACE GRENDERABLE
+	INTERFACE RENDERABLE
 */
 
-#ifndef GRENDERABLE
-#define GRENDERABLE
+#ifndef RENDERABLE
+#define RENDERABLE
 
 #include <windows.h>
-#include "../../basic/bdt_color.hpp"
+#include "../basic/bdt_color.hpp"
 
 namespace bdt {
-namespace graphic {
 
-class GRenderable {
+class Renderable {
 protected:
 
-	GRenderable() {}
+	Renderable() {}
 
 public:
 
@@ -26,7 +25,6 @@ public:
 	
 };
 
-}
 }
 
 #endif
