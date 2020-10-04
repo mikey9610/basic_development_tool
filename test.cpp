@@ -1,11 +1,32 @@
 #include "graphics/bdt_gbutton.hpp"
 #include "graphics/bdt_gpanel.hpp"
 #include "graphics/bdt_gmessagebox.hpp"
+#include "bdt_input_handler.hpp"
 using namespace bdt::graphic;
 using namespace bdt;
 
-#include <conio.h>
+class myInputHandler : public InputHandler {
+protected:
 
+	GButton* button_;
+
+	virtual int set_key_command(KEY_INPUT key) override {
+		switch(key) {
+		case KEY::ENTER:
+			button_->click();
+			return 1;
+		case KEY::ESC:
+			return 2;
+		}
+		return NO_INPUT;
+	}
+
+public:
+
+	myInputHandler(GButton* button)
+	 : button_(button) {}
+
+};
 
 class myButton : public GButton {
 protected:
@@ -29,12 +50,13 @@ int main() {
 	button1.set_label_lines(1);
 
 	panel1.add(&button1);
-	panel1.render();
 
-	getchar();
-		button1.click();
+	myInputHandler handler(&button1);
 
-	getchar();
+	while(true) {
+		panel1.render();
+		if(handler.handle_input(true)==2)	break;
+	}
 
 	return 0;
 }
